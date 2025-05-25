@@ -1,10 +1,25 @@
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") === "light" ? "light" : "dark"
+  );
+
+  const handleThemeChange = (event) => {
+    const newTheme = event.target.checked ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    setTheme(savedTheme);
+    document.querySelector("html").setAttribute("data-theme", savedTheme);
+  }, [theme]);
 
   const handleLogOut = () => {
     logOut().then(() => navigate("/"));
@@ -62,6 +77,13 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
+        <input
+          type="checkbox"
+          value="dark"
+          className="toggle theme-controller mr-6"
+          checked={theme === "dark"}
+          onChange={handleThemeChange}
+        />
         {user ? (
           <div>
             <div className="dropdown dropdown-end mr-6">

@@ -1,7 +1,7 @@
-import React, { use } from "react";
+import { use } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
-import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const { signUpWithEmail, updateProfileInfo } = use(AuthContext);
@@ -20,7 +20,7 @@ const Register = () => {
       <Helmet>
         <title>Register Page | Incubator</title>
       </Helmet>
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-800  py-12 px-4">
         <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-md w-full flex flex-col items-center">
           <div className="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-200 to-purple-200 mb-6 shadow">
             <svg
